@@ -23,8 +23,6 @@ public sealed class FranklinCybertruckPersonalVehicle : Script
     private float _scanRadius = 80f;
     private bool _skipInMissions = true;
     private Keys _toggleKey = Keys.F9;
-    private string _matchPlateText = "FC1988";
-    private string _plateText = "FC1988";
     private bool _forceDefaultColors = true;
     private int _primaryColor = 4;
     private int _secondaryColor = 4;
@@ -93,7 +91,6 @@ public sealed class FranklinCybertruckPersonalVehicle : Script
     {
         Vehicle best = null;
         float bestDistance = _scanRadius;
-        int currentVehicleHandle = Function.Call<int>(Hash.GET_VEHICLE_PED_IS_IN, player.Handle, false);
 
         foreach (Vehicle vehicle in World.GetAllVehicles())
         {
@@ -102,21 +99,12 @@ public sealed class FranklinCybertruckPersonalVehicle : Script
 
             float distance = vehicle.Position.DistanceTo(player.Position);
             if (distance > bestDistance) continue;
-            if (vehicle.Handle != currentVehicleHandle && !PlateMatches(vehicle)) continue;
 
             best = vehicle;
             bestDistance = distance;
         }
 
         return best;
-    }
-
-    private bool PlateMatches(Vehicle vehicle)
-    {
-        if (string.IsNullOrWhiteSpace(_matchPlateText)) return true;
-
-        string actual = Function.Call<string>(Hash.GET_VEHICLE_NUMBER_PLATE_TEXT, vehicle.Handle);
-        return NormalizePlate(actual) == NormalizePlate(_matchPlateText);
     }
 
     private void ReplaceVehicle(Ped player, Vehicle oldVehicle)
@@ -146,7 +134,6 @@ public sealed class FranklinCybertruckPersonalVehicle : Script
         }
 
         Function.Call(Hash.SET_ENTITY_AS_MISSION_ENTITY, newHandle, true, true);
-        Function.Call(Hash.SET_VEHICLE_NUMBER_PLATE_TEXT, newHandle, _plateText);
         Function.Call(Hash.SET_VEHICLE_ON_GROUND_PROPERLY, newHandle);
         Function.Call(Hash.SET_VEHICLE_FIXED, newHandle);
         Function.Call(Hash.SET_VEHICLE_ENGINE_ON, newHandle, true, true, false);
@@ -363,14 +350,6 @@ public sealed class FranklinCybertruckPersonalVehicle : Script
                 Keys parsed;
                 if (Enum.TryParse(value, true, out parsed)) _toggleKey = parsed;
             }
-            else if (key.Equals("PlateText", StringComparison.OrdinalIgnoreCase))
-            {
-                _plateText = value;
-            }
-            else if (key.Equals("MatchPlateText", StringComparison.OrdinalIgnoreCase))
-            {
-                _matchPlateText = value;
-            }
             else if (key.Equals("ForceDefaultColors", StringComparison.OrdinalIgnoreCase))
             {
                 _forceDefaultColors = ParseBool(value, _forceDefaultColors);
@@ -478,11 +457,6 @@ public sealed class FranklinCybertruckPersonalVehicle : Script
         }
 
         return result;
-    }
-
-    private static string NormalizePlate(string value)
-    {
-        return (value ?? string.Empty).Replace(" ", string.Empty).Trim().ToUpperInvariant();
     }
 
     private static int HashKey(string value)

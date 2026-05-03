@@ -14,22 +14,23 @@ Runtime logs and temporary boost snapshot files are intentionally not included.
 
 ## Requirements
 
-- GTA V Story Mode installed at `D:\Steam\GTAV`.
+- GTA V Story Mode installed.
+- Know your `<GTA V install folder>`: the folder that contains `GTA5.exe`. It may be on `C:`, `D:`, another Steam library drive, Epic Games, or Rockstar Games Launcher.
 - BattleEye disabled before launching modded Story Mode.
 - ScriptHookV installed in the GTA V root:
-  - `D:\Steam\GTAV\ScriptHookV.dll`
-  - `D:\Steam\GTAV\dinput8.dll`
+  - `<GTA V install folder>\ScriptHookV.dll`
+  - `<GTA V install folder>\dinput8.dll`
 - ScriptHookVDotNet installed in the GTA V root:
-  - `D:\Steam\GTAV\ScriptHookVDotNet3.dll`
+  - `<GTA V install folder>\ScriptHookVDotNet3.dll`
 - OpenIV installed with:
   - ASI Loader
   - OpenIV.ASI
 - A `scripts` folder at:
-  - `D:\Steam\GTAV\scripts`
+  - `<GTA V install folder>\scripts`
 
 ## Install The Scripts
 
-Copy these files from this folder into `D:\Steam\GTAV\scripts`:
+Copy these files from this folder into `<GTA V install folder>\scripts`:
 
 ```text
 CybertruckWaypointAutopilot.3.cs
@@ -46,19 +47,19 @@ Do not copy `guide.md` into the GTA scripts folder unless you want it there for 
 The Cybertruck add-on DLC must exist here:
 
 ```text
-D:\Steam\GTAV\mods\update\x64\dlcpacks\CyberTruckV\dlc.rpf
+<GTA V install folder>\mods\update\x64\dlcpacks\CyberTruckV\dlc.rpf
 ```
 
 Open OpenIV:
 
 1. Select GTA V for Windows.
-2. Point OpenIV at `D:\Steam\GTAV`.
+2. Point OpenIV at `<GTA V install folder>`.
 3. Install OpenIV.ASI and ASI Loader from `Tools > ASI Manager`.
 4. Enable Edit Mode.
 5. Open:
 
 ```text
-D:\Steam\GTAV\mods\update\update.rpf\common\data\dlclist.xml
+<GTA V install folder>\mods\update\update.rpf\common\data\dlclist.xml
 ```
 
 6. Add this line before the closing `</Paths>` tag:
@@ -71,14 +72,12 @@ D:\Steam\GTAV\mods\update\update.rpf\common\data\dlclist.xml
 
 ## Current Behavior
 
-`FranklinCybertruckPersonalVehicle.3.cs` watches for Franklin's default `buffalo2` personal vehicle with plate `FC1988` and replaces it with `CyberTruckV`.
+`FranklinCybertruckPersonalVehicle.3.cs` watches for Franklin's nearby default `buffalo2` personal vehicle and replaces it with `CyberTruckV`.
 
 Current personal vehicle config:
 
 ```ini
 ReplacementModel=CyberTruckV
-MatchPlateText=FC1988
-PlateText=PARZIVAL
 PrimaryColor=4
 SecondaryColor=4
 PearlescentColor=4
@@ -128,7 +127,7 @@ MadMax.BoostSteeringLock=55
 
 MadMax boost recovery:
 
-- The script saves a temporary restore snapshot at `D:\Steam\GTAV\scripts\CybertruckWaypointAutopilot.active-boost.ini`.
+- The script saves a temporary restore snapshot at `<GTA V install folder>\scripts\CybertruckWaypointAutopilot.active-boost.ini`.
 - That file is created only while MadMax boost is active.
 - On normal stop/cancel/reload, the script restores handling and deletes the snapshot.
 - Do not include that snapshot in backups unless debugging a stuck boost.
@@ -180,15 +179,15 @@ If F10 does nothing:
 - Confirm you are Franklin.
 - Confirm you are driving `CyberTruckV`.
 - Confirm a waypoint is set.
-- Check `D:\Steam\GTAV\ScriptHookVDotNet.log`.
-- Check `D:\Steam\GTAV\scripts\CybertruckWaypointAutopilot.log`.
+- Check `<GTA V install folder>\ScriptHookVDotNet.log`.
+- Check `<GTA V install folder>\scripts\CybertruckWaypointAutopilot.log`.
 
 If the Cybertruck does not replace Franklin's car:
 
 - Confirm `dlclist.xml` contains `dlcpacks:/CyberTruckV/`.
 - Confirm OpenIV.ASI is installed.
 - Confirm the DLC exists at `mods\update\x64\dlcpacks\CyberTruckV\dlc.rpf`.
-- Confirm `FranklinCybertruckPersonalVehicle.3.cs` and `.ini` are in `D:\Steam\GTAV\scripts`.
+- Confirm `FranklinCybertruckPersonalVehicle.3.cs` and `.ini` are in `<GTA V install folder>\scripts`.
 - Press `F9` to make sure the swapper is enabled.
 
 If MadMax handling stays boosted:
@@ -210,31 +209,31 @@ To remove the setup:
 2. Delete:
 
 ```text
-D:\Steam\GTAV\mods\update\x64\dlcpacks\CyberTruckV
-D:\Steam\GTAV\scripts\CybertruckWaypointAutopilot.3.cs
-D:\Steam\GTAV\scripts\CybertruckWaypointAutopilot.ini
-D:\Steam\GTAV\scripts\FranklinCybertruckPersonalVehicle.3.cs
-D:\Steam\GTAV\scripts\FranklinCybertruckPersonalVehicle.ini
+<GTA V install folder>\mods\update\x64\dlcpacks\CyberTruckV
+<GTA V install folder>\scripts\CybertruckWaypointAutopilot.3.cs
+<GTA V install folder>\scripts\CybertruckWaypointAutopilot.ini
+<GTA V install folder>\scripts\FranklinCybertruckPersonalVehicle.3.cs
+<GTA V install folder>\scripts\FranklinCybertruckPersonalVehicle.ini
 ```
 
 3. Optionally delete:
 
 ```text
-D:\Steam\GTAV\scripts\GTA5_StateStreamer.3.cs
+<GTA V install folder>\scripts\GTA5_StateStreamer.3.cs
 ```
 
 ## For Another Codex To Recreate This
 
-Use these exact paths:
+Use these path patterns with your own install folder:
 
 ```text
-GTA root:     D:\Steam\GTAV
-Scripts:      D:\Steam\GTAV\scripts
-Cybertruck:   D:\Steam\GTAV\mods\update\x64\dlcpacks\CyberTruckV\dlc.rpf
-dlclist.xml:  D:\Steam\GTAV\mods\update\update.rpf\common\data\dlclist.xml
+GTA root:     <GTA V install folder>
+Scripts:      <GTA V install folder>\scripts
+Cybertruck:   <GTA V install folder>\mods\update\x64\dlcpacks\CyberTruckV\dlc.rpf
+dlclist.xml:  <GTA V install folder>\mods\update\update.rpf\common\data\dlclist.xml
 ```
 
-Copy the scripts/configs from this folder into `D:\Steam\GTAV\scripts`.
+Copy the scripts/configs from this folder into `<GTA V install folder>\scripts`.
 
 Ensure `dlclist.xml` includes:
 
@@ -245,13 +244,14 @@ Ensure `dlclist.xml` includes:
 Compile-check the autopilot script with:
 
 ```powershell
-& 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe' /nologo /target:library /out:'D:\Steam\GTAV\scripts\__codex_compilecheck.dll' /r:'D:\Steam\GTAV\ScriptHookVDotNet3.dll' /r:'System.Windows.Forms.dll' 'D:\Steam\GTAV\scripts\CybertruckWaypointAutopilot.3.cs'
+$GtaRoot = '<GTA V install folder>'
+& 'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe' /nologo /target:library /out:"$GtaRoot\scripts\__codex_compilecheck.dll" /r:"$GtaRoot\ScriptHookVDotNet3.dll" /r:'System.Windows.Forms.dll' "$GtaRoot\scripts\CybertruckWaypointAutopilot.3.cs"
 ```
 
 Then remove temp compile artifacts:
 
 ```powershell
-Remove-Item 'D:\Steam\GTAV\scripts\__codex_compilecheck.dll','D:\Steam\GTAV\scripts\__codex_compilecheck.pdb' -ErrorAction SilentlyContinue
+Remove-Item "$GtaRoot\scripts\__codex_compilecheck.dll","$GtaRoot\scripts\__codex_compilecheck.pdb" -ErrorAction SilentlyContinue
 ```
 
 Do not delete or overwrite unrelated user mods. Do not copy logs as source files.
