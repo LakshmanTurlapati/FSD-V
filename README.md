@@ -46,6 +46,18 @@ It includes:
 
 </div>
 
+## Gameplay
+
+<div align="center">
+
+<a href="https://youtu.be/RhclAkGEGOQ">
+  <img src="https://img.youtube.com/vi/RhclAkGEGOQ/hqdefault.jpg" alt="Watch GTA FSD gameplay video on YouTube" width="860" />
+</a>
+
+[Watch on YouTube](https://youtu.be/RhclAkGEGOQ)
+
+</div>
+
 ## Install
 
 Use your actual `<GTA V install folder>`: the folder that contains `GTA5.exe`. It may be on `C:`, `D:`, another Steam library drive, Epic Games, or Rockstar Games Launcher.
