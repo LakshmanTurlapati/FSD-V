@@ -38,6 +38,14 @@ It includes:
 - Braking chevrons when the predicted path shrinks.
 - MadMax handling boost with snapshot-based restore/recovery.
 
+## Preview
+
+<div align="center">
+
+<img src="./assets/gta-fsd-preview.png" alt="GTA FSD Cybertruck autopilot in-game preview" width="860" />
+
+</div>
+
 ## Install
 
 Use your actual `<GTA V install folder>`: the folder that contains `GTA5.exe`. It may be on `C:`, `D:`, another Steam library drive, Epic Games, or Rockstar Games Launcher.
