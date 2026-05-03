@@ -1,0 +1,10 @@
+# Runtime artifacts from GTA V / ScriptHookVDotNet sessions.
+*.log
+*.tmp
+*.bak
+CybertruckWaypointAutopilot.active-boost.ini
+
+# Local editor and OS metadata.
+.DS_Store
+.idea/
+.vscode/
